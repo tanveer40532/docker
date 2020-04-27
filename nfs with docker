@@ -1,0 +1,20 @@
+yum -y install nfs-utils
+systemctl enable nfs-server.service
+systemctl start nfs-server.service
+mkdir /var/backups
+chown nfsnobody:nfsnobody /var/backups
+chmod 755 /var/backups
+nano /etc/exports
+/var/backups           192.168.1.101(rw,sync,no_root_squash,no_subtree_check)
+systemctl restart nfs
+exportfs -rv
+[root@node-1 ~]# docker volume create --driver local \
+     --opt type=nfs \
+     --opt o=addr=192.168.43.20,rw \
+     --opt device=:/var/backups \
+     tanveer
+docker container run -dit \
+    --name nfs-service \
+    -v tanveer:/usr/share/nginx/html \
+    nginx:latest
+ docker exec -it 431d0912b703 bash
