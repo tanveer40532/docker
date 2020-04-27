@@ -1,0 +1,27 @@
+[root@node-1 ~]# cat /etc/docker/daemon.json
+{
+  "insecure-registries": ["192.168.43.20:443","node-1.devops.com:443"],
+  "live-restore": true
+}
+ for i in `docker ps -aq`; do docker stop $i ;docker rm $i ; done
+ docker volume ls
+ docker volume prune
+ -------------------------------------------------------------------------------------------------------------------------
+ docker container run -d -p 8000:8000 -p 9000:9000 --name=portainer --restart=always  \
+ -v /var/run/docker.sock:/var/run/docker.sock -v portainer_data:/data portainer/portainer
+ -----------------------------------------------------------------------------------------------------------
+ Admin password:
+
+Inorder to work with htpasswd command install package on Debian machine #apt install apache2-utils
+
+
+htpasswd -nb -B admin <password> | cut -d ":" -f 2
+
+or
+
+docker run --rm httpd:2.4-alpine htpasswd -nbB admin <password> | cut -d ":" -f 2
+
+docker run -d -p 9000:9000 -p 8000:8000 -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer \
+ --admin-password='$2y$05$9qJ0VDDKr0DsKqhqrLKXWuR5WWOXMDB8Jq28r7yo2xGJGn3Y4PQ26'
+ 
+ docker container run -itd --name nginx  -p 8060:80 --restart always nginx:latest
