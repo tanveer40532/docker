@@ -1,0 +1,809 @@
+systemctl status docker
+docker info
+docker images
+docker pull nginx
+ docker run --help
+docker ps
+docker container --help
+docker container start dc21a
+docker container stop dc21a
+docker image inspect httpd
+ docker image prune -a 
+docker
+docker ps -a
+docker container
+docker container start apache apache1 dc21afb0f5cd
+docker run -it -d --name nginx --hostname nginx -p 81:80 --restart always nginx:latest
+docker image rm
+docker rmi c562
+docker exec -it nginx bash
+docker run -it -p 8080:80 nginx:latest /bin/bash
+docker attach psid
+service nginx status
+service nginx start
+docker stop psid
+docker rm psid
+docker run -itd -p 8080:80 nginx:latest /bin/bash
+docker stop $(docker ps -aq)
+docker rm $(docker ps -aq)
+for i in `docker ps -aq`; do docker stop $i ;docker rm $i ; done
+for i in `docker image ls -aq`; do docker rmi -f $i ; done
+docker run --rm -itd --name=nginxout --hostname=nginxin -p 8060:80 nginx
+docker exec -it 1875d72557ee /bin/bash
+docker commit 1875d72557ee  tanveer40532/tanveer1
+
+ocker login
+  docker push tanveer40532/tanveer1
+docker run --rm -itd --privileged=true  --name=centourout --hostname=centos -p 8070:80 centos /usr/sbin/init
+------------------------------------
+network
+------------------------
+docker network create --driver=bridge --subnet=172.28.0.0/16 --ip-range=172.28.5.0/24 --gateway=172.28.5.254 networkname
+docker network create --driver=bridge --subnet=192.168.0.0/16 br0(name)
+docker network inspect (name pid)
+docker network inspect nt2
+docker network create --driver=bridge --subnet=172.32.0.0/16 --ip-range=172.32.5.0/24 --gateway=172.32.5.1 nt3
+docker network ls
+docker network inspect 5d51dc5ba43b
+docker run --rm -itd --privileged=true  --name=centos2 --hostname=centosin2 --network=nt3 --ip=172.32.5.3  -p 900:80 centos /usr/sbin/init
+sysctl net.ipv4.conf.all.forwarding=1
+ iptables -P FORWARD ACCEPT
+docker run --rm -itd --privileged=true  --name=centos2 --hostname=centosin2 --network=nt3 --ip=172.32.5.3  -p 900:80 centos /usr/sbin/init
+------------------------------------------------------------------------------------------------------------
+ docker network attach kishore kishore1
+  376  docker network connect  kishore kishore1
+  377  docker network disconnect mohan  kishore1
+  378  docker inspect kishore1 | grep -i subnet
+  379  docker inspect kishore1
+  380  docker network kishore
+  381  docker network inspect kishore
+----------------------------------------
+ docker volume ls
+ docker run --rm -itd --privileged=true  --name=centou --hostname=centin -v test1:/directory -p 8080:80 centos /usr/sbin/init
+ docker volume --help
+ docker volume create test1
+ docker volume inspect test1
+---------------------------------
+docker stats
+---------------------------
+ 195  docker volume ls
+ 196  docker volume --help
+  197  docker volume inspect kishore
+  198  docker volume create naveen
+  199  docker volume ls
+  200  docker volume inspect naveen
+  201  cd "/var/lib/docker/volumes/naveen/_data"
+  202  pwd
+  203  ls -rlth
+  204  docker info
+  205  pwd
+# Set the default command to run when starting the container
+CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
+
+
+ docker container inspect 63394b20c014
+
+ docker build -t tanveer:1  .
+
+
+ docker run --rm -itd --privileged=true  --name=centos  --mount "type=bind,source=/data1/pak,target=/app" -p 8000:80 centos /usr/sbin/init
+
+ docker volume ls
+ docker volume --help
+-------------------------------------------------------------------------------------------------
+FROM centos:7
+MAINTAINER  mindfusion
+
+RUN yum update -y -y
+CMD /usr/sbin/init
+EXPOSE 8080
+RUN echo “Hello Apache server on centos Docker” > /hello
+COPY datacp  /app1
+RUN  yum install httpd -y
+RUN systemctl enable httpd
+RUN mkdir /fasion1
+#RUN v /data1/hello1:/fasion1
+-------------------------------------------------------------------------------
+docker run --rm -itd --privileged=true  --name=centout22 --hostname=centin112 -v /data1/hello:/fasion1 -p 8040:80 tanveer:1
+----------------------------------------------------------------------------
+FROM centos:7
+MAINTAINER  mindfusion
+
+RUN yum update -y -y
+CMD /use/sbin/init
+CMD /bin/bash
+EXPOSE 8080
+RUN  yum install net-tools -y
+#RUN yum install iputils-ping -y
+#CMD ping www.google.com
+
+#RUN echo “Hello Apache server on centos Docker” > /hello
+#COPY datacp  /app1
+#RUN  yum install httpd -y
+#RUN systemctl enable httpd
+#RUN mkdir /fasion1
+#ENTRYPOINT tail -15  /etc/passwd
+WORKDIR /project
+VOLUME /myvol
+
+#ENTRYPOINT cat /etc/passwd
+---------------------------------------------------------------------
+ vi docker-compose.yml
+docker-compose up -d
+docker-compose -v
+docker-compose version
+ docker-compose -version
+https://github.com/docker/compose/releases/
+ vi docker-compose.yml
+docker-compose  config
+ docker-compose down
+docker-compose up -d --scale web=4
+ docker stats
+ docker-compose --compatibility up -d
+-----------------------------------------------------------------
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: exampleuser
+      WORDPRESS_DB_PASSWORD: examplepass
+      WORDPRESS_DB_NAME: exampledb
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb
+      MYSQL_USER: exampleuser
+      MYSQL_PASSWORD: examplepass
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
+------------------------------------------------------------------------------------------
+
+Functions
+
+    docker-compose.yml management
+
+            dockercompose.create
+
+            dockercompose.get
+
+    Manage containers
+
+            dockercompose.restart
+
+            dockercompose.stop
+
+            dockercompose.pause
+
+            dockercompose.unpause
+
+            dockercompose.start
+
+            dockercompose.kill
+
+            dockercompose.rm
+
+            dockercompose.up
+
+    Manage containers image:
+
+            dockercompose.pull
+
+            dockercompose.build
+
+    Gather information about containers:
+
+            dockercompose.ps
+
+    Manage service definitions:
+
+            dockercompose.service_create
+
+            dockercompose.service_upsert
+
+            dockercompose.service_remove
+
+            dockercompose.service_set_tag
+-----------------------------------------------------------------------------------------------------
+docker-compose.yml
+
+version: '3'
+services:
+       ubuntuwebserver:
+            build: /root/dfile
+            image: "dockcompose/apache2:1.0"
+            container_name: dockercomposeapache2
+            command: /bin/bash
+            command: 'bash'
+            tty: true
+            stdin_open: true
+            privileged: true
+            user: tanveer
+            working_dir: /code
+            domainname:
+            hostname:
+            ipc: host
+            mac_address: 
+
+            ports:
+                - "3308:80"
+--------------------------------------------------------
+Dockerfile
+FROM ubuntu:latest
+MANTAINER HAdood admin
+RUN apt-get update
+RUN apt-get install -y apache2
+#RUN mkdir -p /var/lock/apache2
+#RUN mkdir -p /var/run/apache2
+CMD ["/usr/sbin/apache2","-D","FOREGROUND"]
+EXPOSE 80
+------------------------------------------------------------------------------------------------------------------------------------
+https://docs.nginx.com/nginx/admin-guide/installing-nginx/installing-nginx-docker/    [nginx file ,compose detail]
+--------------------------------------------------------------------------------------------------------
+ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash"]
+
+CMD ["service", "haproxy", "start"]
+
+EXPOSE 80 443
+-----------------------------------
+version: '3'
+
+    services:
+      haproxy:
+        build: ./docker
+        container_name: haproxy
+        ports:
+          - "80:80"
+          - "443:443"
+      - "17001:17001"
+    #restart: always
+    volumes:
+      - "haproxy_config:/etc/haproxy/" 
+    networks:
+      - haproxy_net
+
+volumes:
+  haproxy_config:
+
+networks:
+  haproxy_net:
+    external: true
+--------------------------------
+services:
+  ngcracealong-rsync:
+    entrypoint: ['bash']
+    container_name: 'docker-clojurescript'
+    environment:
+      - DEBUG=true
+    expose:
+      - "3000"
+      - "9000"
+    image: rand/docker-clojurescript
+    ports:
+      - "3000:3000"
+      - "9000:9000"
+    working_dir: '/data'
+    read_only: false
+    privileged: true
+    tty: true
+version: '2'
+---------------------
+services:
+  ngcracealong-rsync:
+    volumes:
+      - ngcracealong-rsync-sync:/data:rw
+version: '2'
+volumes:
+  ngcracealong-rsync-sync:
+    external: true
+------------------------------
+ docker run -it -d --name nginx --hostname nginx -p 81:80 --restart always nginx:latest
+--------------------------------------------------------------------------------------------------------
+ docker run -it -d --name nginx2 --hostname nginx --restart  on-failure -p 801:80 --cpus=0.9 -m 300M --memory-swap=500M nginx
+---------------------------------------------------------
+
+---------------------------------
+# docker pull nginx/http/centos
+
+# docker run -it -d --name nginx -p 800:80 nginx
+
+# docker run -it -d --name nginx1 --hostname nginx  -p 800:80 nginx
+
+# docker run -it -d --name nginx1 --hostname nginx --restart  on-failure -p 800:80 nginx
+
+# docker run -it -d --name nginx1 --hostname nginx --restart  on-failure -p 800:80 nginx
+
+# docker run -it -d --name nginx2 --hostname nginx --restart  on-failure -p 801:80 ---cpus=0.9 -m 300M --memory-swap=500M nginx
+---------------------------------------------------------------------------------------
+docker exec -it 4c056966afba bash systemctl start httpd
+docker exec -it 4c056966afba bash /sbin/service httpd restart
+----------------------------------------------------
+docker network --help
+docker run --help
+docker container --help
+-------------------------------------------------------------------------
+ lsblk -f
+ lsblk -pf
+man lsblk
+-------------------
+docker volume --help
+-----------------------------------
+
+docker cp nginx:/mind/file5 /root/kishore/
+docker cp /root/kishore/123 nginx:/mind/
+------------------------------------------------------------
+version: '3'
+ 
+ services:
+ 
+ wordpress:
+ image: wordpress
+ ports:
+ - 80
+ environment:
+ WORDPRESS_DB_HOST: mysql
+ WORDPRESS_DB_PASSWORD: root
+ networks:
+ - my-bridge
+ 
+ mysql:
+ image: "mysql:5.7.25"
+ environment:
+ MYSQL_ROOT_PASSWORD: root
+ MYSQL_DATABASE: wordpress
+ volumes:
+ - mysql-data:/var/lib/mysql
+ networks:
+ - my-bridge
+ 
+ volumes:
+ mysql-data:
+ 
+ networks:
+ my-bridge:
+ driver: bridge
+-------------------------------------------
+------------------------------------
+net.ipv4.ip_forward = 1
+-----------------------
+version: '3'
+services:
+  redis:
+    hostname: redis
+    image: redis
+
+  redis-commander:
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+    - REDIS_HOSTS=local:redis:6379
+    ports:
+    - "8081:8081"
+-----------------------------------------------------------
+version: '3'
+services:
+  db:
+    image: postgres:11.2-alpine
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRESS_PASSWORD=${POSTGRESS_PASSWORD}
+    jupyter:
+      images: jupyter/scipy-notebook:17aba6048f44
+      volume:
+        - ./:/home/notebook
+      ports:
+        - "8888:8888"
+----------------------------------------------------
+good script for httpd
+---------------
+# The Base Image used to create this Image
+FROM httpd:latest
+
+# Just my name who wrote this file
+MAINTAINER SaravAK (aksarav@middlewareinventory.com)
+
+# to Copy a file named httpd.conf from present working directory to the /usr/local/apache2/conf inside the container
+# I have taken the Standard httpd.conf file and enabled the necassary modules and adding Support for an additional Directory
+COPY httpd.conf /usr/local/apache2/conf/httpd.conf
+
+# This is the Additional Directory where we are going to keep our Virtualhost configuraiton files
+# You can use the image to create N number of different virtual hosts
+RUN mkdir -p /usr/local/apache2/conf/sites/
+
+# To tell docker to expose this port
+EXPOSE 80
+
+# The Base command, This command should be used to start the container
+# Remember, A Container is a Process.As long as the base process (started by base cmd) is live the Container will be ALIVE.
+CMD ["httpd", "-D", "FOREGROUND"]
+
+[or]
+ENTRYPOINT /usr/sbin/httpd -D FOREGROUND
+------------------------------------------------------------------------------------------------------------
+
+
+Korn and bash shells:
+
+export JAVA_HOME=jdk-install-dir
+
+export PATH=$JAVA_HOME/bin:$PATH
+-----------------------------------------------------
+FROM centos:7
+
+MAINTAINER linuxtechlab
+
+#LABEL Remarks=”This is a dockerfile example for Centos system”
+
+RUN yum -y update && \
+yum -y install httpd && \
+yum clean all
+RUN yum install java-1.8.0-openjdk -y
+RUN systemctl enable  httpd
+
+#COPY data/httpd.conf /etc/httpd/conf/httpd.conf
+
+#ADD data/html.tar.gz /var/www/html/
+
+EXPOSE 7080
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64
+ENV PATH=$JAVA_HOME/bin:$PATH
+
+
+#ENV HOME /root
+
+WORKDIR /root
+
+#ENTRYPOINT [“ping”]
+
+VOLUME  /data21
+
+CMD /usr/sbin/init
+# && ["/usr/sbin/httpd" , "-D", "FOREGROUND"] service httpd restart
+-------------------------------------------------------------------------------------------------------------------
+version: '3.7'
+services:
+  centos:
+    build: /root/finaldockerfile/Dockerfile
+    image: tanveertest
+    container_name: tanveercontainertest1
+    restart: on-failure
+    privileged: true
+  #  command: /usr/sbin/init
+    working_dir: /directory
+    domainname: fusion.devops.com
+    hostname: fusion
+    stdin_open: true
+    tty: true
+    working_dir: /code123
+#    networks:
+#      - tanveerbridge
+   # environment:
+   #   - PATH=$JAVA_HOME/bin:$PATH
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 50M
+     #   reservations:
+     #     cpus: '0.25'
+     #     memory: 20M
+    volumes:
+      - type: volume
+        source: mydata123
+---------------------------------------------------------
+FROM centos:7
+MAINTAINER linuxtechlab
+RUN yum -y update; yum -y install httpd; yum clean all; yum install java-1.8.0-openjdk -y; systemctl enable  httpd
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.242.b08-0.el7_7.x86_64
+ENV PATH=$JAVA_HOME/bin:$PATH
+CMD /usr/sbin/init
+
+
+
+
+
+#["/usr/sbin/httpd" , "-D", "FOREGROUND"]
+#RUN systemctl restart httpd
+#VOLUME  /data21
+#LABEL remarks=”This is a dockerfile example for Centos system”
+#LABEL com.example.version="0.0.1-beta"
+#COPY data/httpd.conf /etc/httpd/conf/httpd.conf
+#ADD data/html.tar.gz /var/www/html/
+#EXPOSE 7080
+#WORKDIR /root
+-------------------------------------------------------------------
+https://directdevops.blog/devops-classroom-notes/ 
+kaja notes
+
+https://directdevops.blog/devops-blog-imported-from-qt-blog/
+------------------------------------
+docker info
+docker container ls
+docker image ls
+docker run hello-world
+docker container ls -a 
+-----------------------------------------------
+docker container run <image>
+-------------------------
+sudo apt-get update
+sudo apt-get install apache2 -y
+FROM ubuntu
+RUN "apt-get update"
+RUN "apt-get install apache2 -y"
+docker image build -t myapache .
+----------------------------------------------------------------------------------------------------------------------------------------------
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+sudo usermod -aG docker <username>
+docker info
+----------------------------------------------------------------------------------------------------------------------------------------------
+FROM openjdk:8
+RUN wget https://war-jar-files.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java", "-jar", "spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+docker image build -t spc .
+docker image ls
+docker container run -d -p 8081:8080 spc
+docker container ls
+-----------------------------------------------------------------------------------------------
+FROM tomcat   ===  FROM tomcat:LATEST
+FROM openjdk:8
+RUN wget https://war-jar-files.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java", "-jar", "spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+docker image build -t spc:280120 .
+docker image build -t spc:1.0-280120
+docker image ls
+docker container run -d -p 8080:8080 spc:280120
+docker container run -d -p 8081:8080 spc:280120 echo helloworld
+# Creates a new container and CMD in Dockerfile will be overriden with echo helloworld
+FROM openjdk:8
+ENTRYPOINT ["echo"]
+CMD ["hello"]
+docker container run image
+# hello
+
+docker container run image how are you
+how are you
+FROM openjdk:8
+LABEL author=khaja
+LABEL org=qt
+FROM openjdk:8
+ADD https://war-jar-files.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar /spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+EXPOSE 8080
+CMD ["java", "-jar", "spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+----------------------------------------------------------------------------------------------------------------------
+docker container run jenkins
+
+# press ctrl+c to exit the container and also the container outputs to your terminal
+
+docker container run -d jenkins
+docker container run -it jenkins /bin/bash
+docker container run -it alpine /bin/sh
+Listing Containers
+
+    docker container ls or docker ps will show all the containers in running state
+    docker container ls -a or docker ps -a will show all the containers in running and stopped state
+docker container rm <name-or-id>
+
+docker container rm <name-or-id-container1> <name-or-id-container2> .. 
+docker container rm -f $(docker container ls -a -q)
+docker container run --help
+----------------------------------------------------------------------------------------
+docker inspect <image-id> or <image-name>
+----------------------------------------------------------
+docker volume create myvol
+docker volume ls
+docker volume inspect myvol
+docker container run -it --name cont1 --mount "source=myvol,target=/jars" openjdk:8 /bin/bash
+# Inside cont1
+cd /jars
+wget https://war-jar-files.s3-us-west-2.amazonaws.com/gameoflife.war
+exit
+
+# In Docker Host
+docker container rm -f cont1
+
+# Check for volumes
+docker volume ls
+docker volume inspect
+
+# copy the mount point dir 
+ls <mountpointdir>
+# two files should be available (spc.jar and gol.war)
+docker container run --name cont3 --mount "source=myvol,target=/app" -d -p 8080:8080 openjdk:8 java -jar /app/spring-petclinic.jar
+
+docker container run --name cont4 --mount "source=myvol,target=/app" -d -p 8081:8080 openjdk:8 java -jar /app/spring-petclinic.jar
+
+docker container ls
+
+docker volume ls
+
+# remove all the containers
+docker container rm -f $(docker container ls -a -q)
+docker volume rm myvol
+docker container run --name cont5 --mount "type=bind,source=/app,target=/jars" -d -p 8080:8080 openjdk:8 java -jar /jars/spring-petclinic.jar
+FROM openjdk:8
+
+RUN mkdir /app && cd /app && wget https://war-jar-files.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+VOLUME /app
+EXPOSE 8080
+CMD ["java", "-jar", "/app/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+docker volume ls
+# inspect the required volume and you should see spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar in the mountpoint dir
+docker stats
+---------------------------------------------------------------------------------------------------------------------------------
+ps -eaf
+set
+------------
+docker log camee
+-------------------------
+# Check the contents of root directory in tomcat container
+
+docker container run --name tomcat1 -d tomcat:8
+
+docker container exec tomcat1 ls /
+
+# check the process list
+docker container exec tomcat1 ps -eaf
+
+# executing commands in the interactive mode
+docker container exec -it tomcat1 /bin/bash
+
+docker container stop tomcat1
+docker container ls
+# tomcat1 shouldn't be in the list
+docker container ls -a
+
+# start the container
+docker container start tomcat1
+
+docker image history <imagename>:<tag>
+
+FROM openjdk:8
+
+RUN mkdir /app && cd /app && wget https://war-jar-files.s3-us-west-2.amazonaws.com/spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar
+WORKDIR /app
+EXPOSE 8080
+CMD ["java", "-jar", "spring-petclinic-2.2.0.BUILD-SNAPSHOT.jar"]
+
+* create a container in the interactive mode to check the work directory
+
+docker container run -it demo:0.1 /bin/bash
+
+pwd
+
+USER qt
+
+docker container run --name tomcatwn1 -d -p 8081:8080 tomcat:8
+
+docker container run --name jenkinswn1 -d -p 8082:8080 jenkins
+
+docker container run --name jenkinswn2 -d -p 8081:8080 jenkins
+
+docker: Error response from daemon: driver failed programming external connectivity on endpoint jenkinswn2 (1b1e
+dac2c349d064d7b5a50ff2e883ebb426d1da1b7afd61e6e2935bc5d9d919): Bind for 0.0.0.0:8081 failed: port is already allocated.
+
+docker container run --name jenkinswn3 -d -P jenkins
+
+docker container run --name c1 -d alpine sleep 1d
+docker container run --name c2 -d alpine sleep 1d
+
+# inspect the network
+docker network inspect bridge
+
+# make a note ip addresses of c1 and c2
+
+* Login into c1 container and ping c2 by name and ipaddress
+
+docker container exec -it c1 /bin/sh
+
+ping -c 4 172.17.0.3
+# it works
+
+# ping by name of the continer
+
+ping -c 4 c2
+# it fails
+---------------------------------------------------------------------------------------------------------------------------------
+docker network create --driver bridge --subnet 10.11.0.0/16 mybridge
+
+docker network ls
+
+docker network inspect mybridge
+
+docker container run --name p1 --network mybridge -d alpine sleep 1d
+
+docker container run --name p2 --network mybridge -d alpine sleep 1d
+
+docker network inspect mybridge
+# make a note of ip addresses
+docker exec p1 ping -c 3 10.11.0.3
+
+docker exec p1 ping -c 3 p2
+
+docker network connect mybridge c1
+
+docker network inspect mybridge
+
+
+docker exec p1 ping -c 3 c1
+------------------------------------------------
+docker swarm init --advertise-addr <Manager-ip>
+
+# In my case this is
+docker swarm init --advertise-addr 172.31.42.125
+
+##Outpu###
+Swarm initialized: current node (uyclb1gbhhqhlo80aq7zhx2z4) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join --token SWMTKN-1-1w51ouq6zrmts85l71z53ruqcc1pivzprpigdodspu58o7dp3z-172clbo51xq8w7uwizm8cc19t 172.31.42.125:2377
+
+To add a manager to this swarm, run 'docker swarm join-token manager' and follow the instructions.
+
+docker info
+ docker node ls
+
+docker swarm join --token SWMTKN-1-1w51ouq6zrmts85l71z53ruqcc1pivzprpigdodspu58o7dp3z-172clbo51xq8w7uwizm8cc19t 172.31.42.125:2377
+
+##Output##
+This node joined a swarm as a worker.
+
+docker service create --replicas 2 --name tomcat tomcat:8
+
+tvdml6nt5dryszozaydr8sv8o
+
+overall progress: 2 out of 2 tasks                                            
+1/2: running   [==================================================>]
+
+2/2: running   [==================================================>]
+verify: Service converged 
+
+docker service ls
+
+docker service ps tomcat
+
+docker service scale tomcat=4
+
+service rm tomcat
+
+docker service create --name jenkins --replicas 2 --update-delay 10s --publish published=8081,target=8080 jenkins:1.609.1
+docker service update --image jenkins:latest jenkins
+docker network ls
+* A three-manager swarm tolerates a maximum loss of one manager.
+* A five-manager swarm tolerates a maximum simultaneous loss of two manager nodes.
+* An N manager cluster tolerates the loss of at most (N-1)/2 managers.
+* Docker recommends a maximum of seven manager nodes for a swarm.
+
+docker node promote
+
+docker service create --replicas 2 --publish mode=ingress,target=80,published=8080 nginx
+
+docker service create --replicas 2 --publish mode=host,target=80,published=8080 nginx
+----------------------------------------------------------------------------------------
+curl -sSL https://get.docker.com/ | sh
+sudo service docker start
+sudo usermod -aG docker $(id -un)
+---------------------------------------------------------------
