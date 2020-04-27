@@ -1,0 +1,85 @@
+NFS server configuration:
+
+Lets say my NFS server IP address: 192.168.0.50
+Client: 192.168.0.51
+
+Setup NFS server:
+#apt-get update
+#apt-get install -y nfs-kernel-server
+
+Lets create shared directory on NFS server to clients:
+#mkdir -p /var/nfs/data
+#chown nobody:nogroup /var/nfs/data
+
+Note: NFS will translate any root operations on the client to the nobody:nogroup
+credentials as a security measure. Therefore, we need to change the directory
+ownership to match those credentials.
+
+Now export created shared directory:
+#vi/nano /etc/exports
+add below entries based on your configuration
+++
+/var/nfs/data    192.168.0.51(rw,sync,no_subtree_check)
+/home       192.168.0.51(rw,sync,no_root_squash,no_subtree_check) --> optional
+++
+
+save and exit
+
+Now restart nfs service as mentioned below:
+#systemctl restart nfs-kernel-server
+
+
+NFS client configuration:
+
+#apt update
+#apt-get install -y nfs-common
+
+Now create on directory to moun the NFS path or we can use /mnt directory to
+mount:
+#mkdir -p /nfs/general
+#mount 192.168.0.50:/var/nfs/data /nfs/general
+
+verify the mounted path to client with below command:
+#df -h
+
+Note: After next reboot mount path will be removed, so in-order to make it
+permanent add the mount entries of NFS server to the client server in fstab
+file.
+
+#vi /etc/fstab
+++
+192.168.0.50:/var/nfs/data    /nfs/general   nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+192.168.0.50:/home       /nfs/home      nfs auto,nofail,noatime,nolock,intr,tcp,actimeo=1800 0 0
+++
+Save and exit
+
+
+Mount the NFS volume to docker container:
+
+Syntax:
+
+docker service create \
+    --mount 'type=volume,src=<VOLUME-NAME>,dst=<CONTAINER-PATH>,volume-driver=local,volume-opt=type=nfs,volume-opt=device=<nfs-server>:<nfs-path>,"volume-opt=o=addr=<nfs-address>,vers=4,soft,timeo=180,bg,tcp,rw"'
+    --name myservice \
+    <IMAGE>
+
+Example:
+
+docker service create -d \
+    --name nfs-service \
+    --mount 'type=volume,source=nfsvolume,target=/app,volume-driver=local,volume-opt=type=nfs,volume-opt=device=:/var/nfs/data,"volume-opt=o=191.68.0.50,rw,nfsvers=4,async"' \
+    nginx:latest
+
+In this case, we can also create a volume which points to NFS server and then use that volume to our container:
+
+docker volume create --driver local \
+    --opt type=nfs \
+    --opt o=addr=192.168.0.50,rw \
+    --opt device=:/var/nfs/data \
+    foo
+
+To use physical hard disk/partition, please use below command:
+
+$ docker volume create --driver local \
+    --opt type=btrfs \
+    --opt device=/dev/sdb local-disk

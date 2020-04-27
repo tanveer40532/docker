@@ -1,0 +1,13 @@
+Docker uses host network to container with no network isolation.
+
+Host mode networking can be useful to optimize performance, and in situations where a container needs to handle a large range of ports, as it does not require network address translation (NAT), and no “userland-proxy” is created for each port.
+
+We can take an example to deploy application like nginx which uses 80 port by default on the Docker host machine.
+
+Note: 
+1)Other applications running on Docker host already listen on 80, nginx container need to be customized to listen on different port number
+2)host network works only on Linux machines
+
+Start a container to run on detach mode (run in background)
+
+docker container run -d --rm --network host --name test-nginx nginx
