@@ -1,0 +1,78 @@
+echo "# docker" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/tanveer40532/docker.git
+git push -u origin master
+
+git remote add origin https://github.com/tanveer40532/docker.git
+git push -u origin master
+--------------------------------------------
+git status
+git add filename
+git commit -m "first commit"
+git push -u origin master
+----------------------------------------
+git status
+git log
+ git branch
+ git config --list
+ git clone url
+ -----------------------------------------------------
+ cd/your project directory
+
+ 1) git init
+ 2) git add . or git add ['filename']
+ 3) git commit -m "My first File"
+ 4) git remote add origin https://github.com/yourusername/your-repo-name.git
+ 5) git pull origin master
+ 6) git push origin master
+ -------------------------------------------------------------------------
+ git remote -v
+ cat .git/config
+ git remote rm origin
+ cat .git/config
+ git remote -v
+ git remote add origin https://github.com/tanveer40532/ans.git
+ ----------------------------------------------------------------------------------------------
+ 
+
+Use git rm.
+
+If you want to remove the file from the Git repository and the filesystem, use:
+
+git rm file1.txt
+git commit -m "remove file1.txt"
+
+But if you want to remove the file only from the Git repository and not remove it from the filesystem, use:
+
+git rm --cached file1.txt
+git commit -m "remove file1.txt"
+
+And to push changes to remote repo
+
+git push origin branch_name
+----------------------------------------------------------------
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+------------------------------------------------------------  
+cd .git
+ls -F
+----------------------------------------------------
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
